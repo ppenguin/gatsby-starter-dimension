@@ -7,7 +7,7 @@ import '../assets/scss/main.scss'
 
 const Layout = ({ children, location }) => {
 
-  let content;
+  var content: JSX.Element;
 
   if (location && location.pathname === '/') {
     content = (

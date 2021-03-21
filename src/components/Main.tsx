@@ -1,10 +1,19 @@
-import PropTypes from 'prop-types'
+import { PageProps } from 'gatsby'
 import React from 'react'
 import pic01 from '../images/pic01.jpg'
 import pic02 from '../images/pic02.jpg'
 import pic03 from '../images/pic03.jpg'
 
-class Main extends React.Component {
+interface MainProps extends PageProps {
+  onCloseArticle: Function,
+  setWrapperRef : any,
+  timeout: boolean,
+  articleTimeout: boolean,
+  article: string,
+  isArticleVisible: boolean,
+}
+
+class Main extends React.Component<MainProps> {
   render() {
     let close = (
       <div
@@ -126,7 +135,7 @@ class Main extends React.Component {
             </div>
             <div className="field">
               <label htmlFor="message">Message</label>
-              <textarea name="message" id="message" rows="4"></textarea>
+              <textarea name="message" id="message" rows={4}></textarea>
             </div>
             <ul className="actions">
               <li>
@@ -170,15 +179,6 @@ class Main extends React.Component {
       </div>
     )
   }
-}
-
-Main.propTypes = {
-  route: PropTypes.object,
-  article: PropTypes.string,
-  articleTimeout: PropTypes.bool,
-  onCloseArticle: PropTypes.func,
-  timeout: PropTypes.bool,
-  setWrapperRef: PropTypes.func.isRequired,
 }
 
 export default Main

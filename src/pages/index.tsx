@@ -1,13 +1,27 @@
 import React from 'react'
+import { PageProps } from 'gatsby'
+
 import Layout from '../components/layout'
 
 import Header from '../components/Header'
 import Main from '../components/Main'
 import Footer from '../components/Footer'
 
-class IndexPage extends React.Component {
-  constructor(props) {
-    super(props)
+interface IndexState {
+  isArticleVisible: boolean,
+  timeout: boolean,
+  articleTimeout: boolean,
+  article: string,
+  loading: string,
+}
+
+
+class IndexPage extends React.Component<PageProps,IndexState> {
+  timeoutId: NodeJS.Timeout;
+  wrapperRef: any;
+
+  constructor(props: PageProps) {
+    super(props);
     this.state = {
       isArticleVisible: false,
       timeout: false,
@@ -15,8 +29,8 @@ class IndexPage extends React.Component {
       article: '',
       loading: 'is-loading'
     }
-    this.handleOpenArticle = this.handleOpenArticle.bind(this)
-    this.handleCloseArticle = this.handleCloseArticle.bind(this)
+    this.handleOpenArticle = this.handleOpenArticle.bind(this);
+    this.handleCloseArticle = this.handleCloseArticle.bind(this);
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
@@ -102,6 +116,7 @@ class IndexPage extends React.Component {
               article={this.state.article}
               onCloseArticle={this.handleCloseArticle}
               setWrapperRef={this.setWrapperRef}
+              {...this.props}
             />
             <Footer timeout={this.state.timeout} />
           </div>
